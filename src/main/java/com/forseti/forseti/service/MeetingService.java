@@ -27,12 +27,13 @@ public class MeetingService {
 
     private List<Meeting> getUserWithStatus(String userId, Predicate<MeetingStatus> meetingStatusPredicate) {
         return meetingRepository.findAll().stream()
-                .filter(meeting -> userIsInMeeting(userId, meeting) && meetingStatusPredicate.test(meeting.getStatus()))
+                .filter(meeting -> userIsInMeeting(userId, meeting))
+                .filter(meeting -> meetingStatusPredicate.test(meeting.getStatus()))
                 .sorted(Comparator.comparing(Meeting::getDate))
                 .collect(Collectors.toList());
     }
 
     private boolean userIsInMeeting(String userId, Meeting meeting) {
-        return meeting.getRequests().stream().anyMatch(request -> request.user.equals(userId));
+        return meeting.getRequests().stream().anyMatch(request -> request.getUser().getId().equals(userId));
     }
 }
