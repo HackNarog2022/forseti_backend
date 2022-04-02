@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 @Data
@@ -20,4 +21,10 @@ public class Meeting {
     private Set<String> inspirations;
     private Date date;
     private Collection<SuggestedPlace> suggestedPlaces;
+    /**
+     * Mao holds user ratings
+     * key -> userId
+     * value -> rating that this user got from the another user
+     */
+    private Map<String, Integer> ratings;
 }

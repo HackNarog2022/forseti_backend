@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,28 @@ public class MeetingService {
 
     public List<Meeting> notDoneUserMeetings(String userId) {
         return getUserWithStatus(userId, meetingStatus -> !meetingStatus.equals(MeetingStatus.FINISHED));
+    }
+
+    public List<Integer> getUserRatings(String userId) {
+        return meetingRepository.findAll().stream()
+                .sorted(Comparator.comparing(Meeting::getDate))
+                .map(meeting -> meeting.getRatings().get(userId))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @param meetingId
+     * @param userId    id of user that gets a rating
+     * @param rating
+     */
+    public Optional<Meeting> addRating(String meetingId, String userId, Integer rating) {
+        var meeting = meetingRepository.findById(meetingId);
+        return meeting.map(foundMeeting -> {
+            foundMeeting.getRatings().put(userId, rating);
+            meetingRepository.save(foundMeeting);
+            return foundMeeting;
+        });
     }
 
     private List<Meeting> getUserWithStatus(String userId, Predicate<MeetingStatus> meetingStatusPredicate) {
