@@ -2,14 +2,14 @@ services:
   - docker:dind
 
 stages:
-  - test
+#  - test
   - build_publish
 
-sast:
-  stage: test
+#sast:
+#  stage: test
 
-include:
-- template: Security/SAST.gitlab-ci.yml
+#include:
+#- template: Security/SAST.gitlab-ci.yml
 
 variables:
   CONTAINER_REGISTRY: hacknarog2022acr.azurecr.io
