@@ -27,7 +27,8 @@ public class MeetingService {
 
     private List<Meeting> getUserWithStatus(String userId, Predicate<MeetingStatus> meetingStatusPredicate) {
         return meetingRepository.findAll().stream()
-                .filter(meeting -> userIsInMeeting(userId, meeting) && meetingStatusPredicate.test(meeting.getStatus()))
+                .filter(meeting -> userIsInMeeting(userId, meeting))
+                .filter(meeting -> meetingStatusPredicate.test(meeting.getStatus()))
                 .sorted(Comparator.comparing(Meeting::getDate))
                 .collect(Collectors.toList());
     }
