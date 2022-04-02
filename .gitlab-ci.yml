@@ -2,22 +2,22 @@ services:
   - docker:dind
 
 stages:
-  # - test
+  - test
   - build_publish
 
-# sast:
-#   stage: test
+sast:
+  stage: test
 
-# include:
-# - template: Security/SAST.gitlab-ci.yml
+include:
+- template: Security/SAST.gitlab-ci.yml
 
 variables:
   CONTAINER_REGISTRY: hacknarog2022acr.azurecr.io
 
 docker_build:
   stage: build_publish
-  image: openjdk:17
+  image: docker:latest
   script:
     - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $CONTAINER_REGISTRY
-    - ./gradlew bootBuildImage --imageName=$CONTAINER_REGISTRY/api:latest
+    - docker build -t $CONTAINER_REGISTRY/api:latest  .
     - docker push $CONTAINER_REGISTRY/api:latest
