@@ -16,7 +16,7 @@ import java.util.List;
 public class CategoryController {
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/categories", method = RequestMethod.GET)
     public List<String> getCategories() {
         categoryService.getAll();
         List<String> productsList = new ArrayList<>();
