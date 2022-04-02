@@ -14,12 +14,12 @@ import java.util.List;
 public class MeetingController {
     private MeetingService meetingService;
 
-    @RequestMapping(value = "/doneUserMeetings", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/doneUserMeetings", method = RequestMethod.GET)
     public List<Meeting> doneUserMeetings(String userId) {
         return meetingService.doneUserMeetings(userId);
     }
 
-    @RequestMapping(value = "/notDoneUserMeetings", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/notDoneUserMeetings", method = RequestMethod.GET)
     public List<Meeting> notDoneUserMeetings(String userId) {
         return meetingService.notDoneUserMeetings(userId);
     }

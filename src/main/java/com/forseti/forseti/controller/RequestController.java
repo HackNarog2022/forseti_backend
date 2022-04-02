@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RequestController {
     private final RequestService requestService;
 
-    @PostMapping(path = "requests", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(path = "/api/requests", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Request> addRequest(@RequestBody Request request) {
         var newRequest = requestService.addRequest(request);

@@ -16,17 +16,17 @@ import java.util.Set;
 public class CategoryController {
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
         return categoryService.getAll();
     }
 
-    @RequestMapping(value = "/newCategory", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/newCategory", method = RequestMethod.POST)
     public void newCategory(String name, Set<Inspiration> inspirations) {
         categoryService.saveNewCategory(name, inspirations);
     }
 
-//    @RequestMapping(value = "/saveSample", method = RequestMethod.POST)
+//    @RequestMapping(value = "/api/saveSample", method = RequestMethod.POST)
 //    public void saveCategories() {
 //        saveSamples();
 //    }
