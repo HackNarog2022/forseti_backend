@@ -2,8 +2,8 @@ package com.forseti.forseti.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Document
+@Builder
 public class Request {
 
     @Id

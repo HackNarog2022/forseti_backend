@@ -1,7 +1,6 @@
 package com.forseti.forseti.controller;
 
 import com.forseti.forseti.model.Category;
-import com.forseti.forseti.model.Inspiration;
 import com.forseti.forseti.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/api/newCategory", method = RequestMethod.POST)
-    public void newCategory(String name, Set<Inspiration> inspirations) {
+    public void newCategory(String name, Set<String> inspirations) {
         categoryService.saveNewCategory(name, inspirations);
     }
 
@@ -34,35 +33,35 @@ public class CategoryController {
     private void saveSamples() {
         List.of(
                 new Category("Football", Set.of(
-                        new Inspiration("World Cup 2022"),
-                        new Inspiration("Premier League"),
-                        new Inspiration("Champions League")
+                        "World Cup 2022",
+                        "Premier League",
+                        "Champions League"
                 )),
                 new Category("Philosophy", Set.of(
-                        new Inspiration("History of philosophy"),
-                        new Inspiration("What is the truth?"),
-                        new Inspiration("Definition of manipulation")
+                        "History of philosophy",
+                        "What is the truth?",
+                        "Definition of manipulation"
                 )),
                 new Category("Computer Science", Set.of(
-                        new Inspiration("Learning new programming language")
+                        "Learning new programming language"
                 )),
                 new Category("Dancing", Set.of(
-                        new Inspiration("How to start dancing?"),
-                        new Inspiration("Can you dance at home?")
+                        "How to start dancing?",
+                        "Can you dance at home?"
                 )),
                 new Category("Politics", Set.of(
-                        new Inspiration("Favourite party"),
-                        new Inspiration("Pros and cons of EU")
+                        "Favourite party",
+                        "Pros and cons of EU"
                 )),
                 new Category("Dogs", Set.of(
-                        new Inspiration("Best food for dog"),
-                        new Inspiration("How to clean dog"),
-                        new Inspiration("Best toys")
+                        "Best food for dog",
+                        "How to clean dog",
+                        "Best toys"
                 )),
                 new Category("City-break", Set.of(
-                        new Inspiration("What places to visit?"),
-                        new Inspiration("Where to eat?"),
-                        new Inspiration("How to use public transport?")
+                        "What places to visit?",
+                        "Where to eat?",
+                        "How to use public transport?"
                 ))
         ).forEach(
                 category -> categoryService.saveNewCategory(category.getName(), category.getInspirations())
