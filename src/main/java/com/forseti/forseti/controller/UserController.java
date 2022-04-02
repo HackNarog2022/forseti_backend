@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserController {
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public Map<String, Object> getUser() {
         var user = (AadOAuth2AuthenticatedPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getAttributes();
