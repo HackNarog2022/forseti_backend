@@ -12,5 +12,5 @@ public class Category {
 
     @Id
     private String name;
-    private Set<Inspiration> inspirations;
+    private Set<String> inspirations;
 }

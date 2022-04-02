@@ -1,7 +1,6 @@
 package com.forseti.forseti.service;
 
 import com.forseti.forseti.model.Category;
-import com.forseti.forseti.model.Inspiration;
 import com.forseti.forseti.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public void saveNewCategory(String name, Set<Inspiration> inspirations) {
+    public void saveNewCategory(String name, Set<String> inspirations) {
         this.categoryRepository.save(new Category(name, inspirations));
     }
 }
