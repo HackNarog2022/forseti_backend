@@ -27,6 +27,7 @@ public class MatchingService {
         List<Request> requestList = all
                 .stream()
                 .filter(candidate -> !candidate.getRequestId().equals(request.getRequestId()))
+                .filter(candidate -> !candidate.getUser().getId().equals(request.getUser().getId()))
                 .filter(candidate -> candidate.getCategory().getName().equals(request.getCategory().getName()))
                 .filter(candidate -> candidate.getStartDate().before(request.getEndDate()))
                 .filter(candidate -> candidate.getEndDate().after(request.getStartDate()))
