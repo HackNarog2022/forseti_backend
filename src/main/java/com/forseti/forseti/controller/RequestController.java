@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -25,5 +25,10 @@ public class RequestController {
         } else {
             return new ResponseEntity<>(newRequest, HttpStatus.CREATED);
         }
+    }
+
+    @RequestMapping(value = "/api/requests", method = RequestMethod.GET)
+    public List<Request> allRequests() {
+        return requestService.getAll();
     }
 }
