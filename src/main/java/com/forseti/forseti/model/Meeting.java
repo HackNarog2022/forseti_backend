@@ -1,12 +1,15 @@
 package com.forseti.forseti.model;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
 @Data
+@Builder
 public class Meeting {
 
     @Id
@@ -16,4 +19,5 @@ public class Meeting {
     private MeetingStatus status;
     private Set<Inspiration> inspirations;
     private Date date;
+    private Collection<SuggestedPlace> suggestedPlaces;
 }

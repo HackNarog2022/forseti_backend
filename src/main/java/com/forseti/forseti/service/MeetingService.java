@@ -33,6 +33,6 @@ public class MeetingService {
     }
 
     private boolean userIsInMeeting(String userId, Meeting meeting) {
-        return meeting.getRequests().stream().anyMatch(request -> request.user.equals(userId));
+        return meeting.getRequests().stream().anyMatch(request -> request.getUser().getId().equals(userId));
     }
 }
