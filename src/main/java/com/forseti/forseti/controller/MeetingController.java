@@ -1,15 +1,14 @@
 package com.forseti.forseti.controller;
 
+import com.azure.spring.cloud.autoconfigure.aad.implementation.oauth2.AadOAuth2AuthenticatedPrincipal;
 import com.forseti.forseti.model.Meeting;
 import com.forseti.forseti.service.MeetingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,14 +17,21 @@ import java.util.List;
 public class MeetingController {
     private MeetingService meetingService;
 
+    @RequestMapping(value = "/api/meeting/{id}", method = RequestMethod.GET)
+    public Meeting meeting(@PathVariable("id") String id) {
+        return meetingService.meeting(id);
+    }
+
     @RequestMapping(value = "/api/doneUserMeetings", method = RequestMethod.GET)
-    public List<Meeting> doneUserMeetings(String userId) {
-        return meetingService.doneUserMeetings(userId);
+    public List<Meeting> doneUserMeetings() {
+        var user = (AadOAuth2AuthenticatedPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return meetingService.doneUserMeetings(user.getName());
     }
 
     @RequestMapping(value = "/api/notDoneUserMeetings", method = RequestMethod.GET)
-    public List<Meeting> notDoneUserMeetings(String userId) {
-        return meetingService.notDoneUserMeetings(userId);
+    public List<Meeting> notDoneUserMeetings() {
+        var user = (AadOAuth2AuthenticatedPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return meetingService.notDoneUserMeetings(user.getName());
     }
 
     @PostMapping(path = "/api/addRating", consumes = MediaType.APPLICATION_JSON_VALUE,
