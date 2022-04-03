@@ -19,12 +19,16 @@ public class MeetingService {
 
     private MeetingRepository meetingRepository;
 
+    public Meeting meeting(String id) {
+        return meetingRepository.findById(id).orElseThrow();
+    }
+
     public List<Meeting> doneUserMeetings(String userId) {
-        return getUserWithStatus(userId, meetingStatus -> meetingStatus.equals(MeetingStatus.FINISHED));
+        return getUserWithStatus(userId, meetingStatus -> meetingStatus != null && meetingStatus.equals(MeetingStatus.FINISHED));
     }
 
     public List<Meeting> notDoneUserMeetings(String userId) {
-        return getUserWithStatus(userId, meetingStatus -> !meetingStatus.equals(MeetingStatus.FINISHED));
+        return getUserWithStatus(userId, meetingStatus -> meetingStatus == null || !meetingStatus.equals(MeetingStatus.FINISHED));
     }
 
     public List<Integer> getUserRatings(String userId) {
