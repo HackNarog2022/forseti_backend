@@ -34,6 +34,14 @@ public class MeetingController {
         return meetingService.notDoneUserMeetings(user.getName());
     }
 
+    @PostMapping(path = "/api/setFinished", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Meeting> setFinished(String meetingId) {
+        return meetingService.setFinished(meetingId)
+                .map(meeting -> new ResponseEntity<>(meeting, HttpStatus.CREATED))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
     @PostMapping(path = "/api/addRating", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Meeting> addRating(String meetingId, String userId, Integer rating) {
