@@ -1,19 +1,13 @@
 package com.forseti.forseti.service;
 
 import com.forseti.forseti.model.Meeting;
-import com.forseti.forseti.model.MeetingStatus;
 import com.forseti.forseti.model.Request;
 import com.forseti.forseti.repository.MeetingRepository;
 import com.forseti.forseti.repository.RequestRepository;
-import com.forseti.forseti.repository.SuggestedPlaceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Component
 @AllArgsConstructor
@@ -44,7 +38,7 @@ public class MatchingService {
                     .category(request.getCategory())
                     .date(new Date(Calendar.getInstance().getTime().getTime()))
                     .inspirations(request.getCategory().getInspirations())
-                    .status(MeetingStatus.NOT_YET_MET)
+                    .active(true)
                     .suggestedPlaces(suggestedPlaceService.getSuggestedPlacesForLocation(request.getPlace()))
                     .build();
 
