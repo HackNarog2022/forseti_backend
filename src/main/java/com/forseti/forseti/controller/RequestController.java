@@ -2,7 +2,6 @@ package com.forseti.forseti.controller;
 
 import com.forseti.forseti.model.Request;
 import com.forseti.forseti.service.RequestService;
-import com.forseti.forseti.service.TextAnalyticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,5 +30,10 @@ public class RequestController {
     @RequestMapping(value = "/api/requests", method = RequestMethod.GET)
     public List<Request> allRequests() {
         return requestService.getAll();
+    }
+
+    @RequestMapping(value = "/api/request/{id}", method = RequestMethod.GET)
+    public Request request(@PathVariable("id") String id) {
+        return requestService.getById(id);
     }
 }
