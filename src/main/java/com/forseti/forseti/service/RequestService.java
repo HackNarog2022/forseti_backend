@@ -25,5 +25,8 @@ public class RequestService {
         return repository.findAll();
     }
 
+    public Request getById(String id) {
+        return repository.findById(id).orElseThrow();
+    }
 
 }
