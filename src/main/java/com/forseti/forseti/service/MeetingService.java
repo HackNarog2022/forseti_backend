@@ -5,10 +5,7 @@ import com.forseti.forseti.repository.MeetingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +41,9 @@ public class MeetingService {
      */
     public Optional<Meeting> addRating(String meetingId, String userId, Integer rating) {
         return meetingRepository.findById(meetingId).map(foundMeeting -> {
+            if(foundMeeting.getRatings() == null) {
+                foundMeeting.setRatings( new HashMap<>());
+            }
             foundMeeting.getRatings().put(userId, rating);
             meetingRepository.save(foundMeeting);
             return foundMeeting;
