@@ -1,11 +1,13 @@
 package com.forseti.forseti.controller;
 
+import com.azure.spring.cloud.autoconfigure.aad.implementation.oauth2.AadOAuth2AuthenticatedPrincipal;
 import com.forseti.forseti.model.Request;
 import com.forseti.forseti.service.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +31,8 @@ public class RequestController {
 
     @RequestMapping(value = "/api/requests", method = RequestMethod.GET)
     public List<Request> allRequests() {
-        return requestService.getAll();
+        var user = (AadOAuth2AuthenticatedPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return requestService.getAllUserRequests(user.getName());
     }
 
     @RequestMapping(value = "/api/request/{id}", method = RequestMethod.GET)
