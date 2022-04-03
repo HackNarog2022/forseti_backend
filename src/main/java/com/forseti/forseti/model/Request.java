@@ -22,6 +22,7 @@ public class Request {
     private User user;
     private Category category;
     private String freeText;
+    private boolean isNegative;
     private String place;
     private ExpertiseEnum expectedExpertise;
     private ExpertiseEnum declaredExpertise;
