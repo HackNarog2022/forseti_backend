@@ -1,7 +1,6 @@
 package com.forseti.forseti.service;
 
 import com.forseti.forseti.model.Meeting;
-import com.forseti.forseti.model.MeetingStatus;
 import com.forseti.forseti.repository.MeetingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +18,11 @@ public class MeetingService {
     private MeetingRepository meetingRepository;
 
     public List<Meeting> doneUserMeetings(String userId) {
-        return getUserWithStatus(userId, meetingStatus -> meetingStatus.equals(MeetingStatus.FINISHED));
+        return getUserWithStatus(userId, false);
     }
 
     public List<Meeting> notDoneUserMeetings(String userId) {
-        return getUserWithStatus(userId, meetingStatus -> !meetingStatus.equals(MeetingStatus.FINISHED));
+        return getUserWithStatus(userId, true);
     }
 
     public List<Integer> getUserRatings(String userId) {
@@ -41,18 +39,25 @@ public class MeetingService {
      * @param rating
      */
     public Optional<Meeting> addRating(String meetingId, String userId, Integer rating) {
-        var meeting = meetingRepository.findById(meetingId);
-        return meeting.map(foundMeeting -> {
+        return meetingRepository.findById(meetingId).map(foundMeeting -> {
             foundMeeting.getRatings().put(userId, rating);
             meetingRepository.save(foundMeeting);
             return foundMeeting;
         });
     }
 
-    private List<Meeting> getUserWithStatus(String userId, Predicate<MeetingStatus> meetingStatusPredicate) {
+    public Optional<Meeting> setFinished(String meetingId) {
+        return meetingRepository.findById(meetingId).map(foundMeeting -> {
+            foundMeeting.setActive(false);
+            meetingRepository.save(foundMeeting);
+            return foundMeeting;
+        });
+    }
+
+    private List<Meeting> getUserWithStatus(String userId, boolean isActive) {
         return meetingRepository.findAll().stream()
                 .filter(meeting -> userIsInMeeting(userId, meeting))
-                .filter(meeting -> meetingStatusPredicate.test(meeting.getStatus()))
+                .filter(meeting -> meeting.isActive() == isActive)
                 .sorted(Comparator.comparing(Meeting::getDate))
                 .collect(Collectors.toList());
     }

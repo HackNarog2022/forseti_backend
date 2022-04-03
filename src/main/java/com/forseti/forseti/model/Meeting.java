@@ -17,7 +17,7 @@ public class Meeting {
     private String id;
     private Category category;
     private Set<Request> requests;
-    private MeetingStatus status;
+    private boolean active;
     private Set<String> inspirations;
     private Date date;
     private Collection<SuggestedPlace> suggestedPlaces;
