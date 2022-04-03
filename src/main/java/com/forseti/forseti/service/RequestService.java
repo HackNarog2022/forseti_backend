@@ -12,8 +12,10 @@ import java.util.List;
 public class RequestService {
     private RequestRepository repository;
     private MatchingExecutor matchingExecutor;
+    private TextAnalyticsService textAnalyticsService;
 
     public Request addRequest(Request request) {
+        request.setNegative(textAnalyticsService.isNegative(request.getFreeText()));
         Request createdRequest = repository.insert(request);
         matchingExecutor.scheduleMatching(createdRequest);
         return createdRequest;
