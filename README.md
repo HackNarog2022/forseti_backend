@@ -8,9 +8,9 @@
 [https://youtu.be/EwzhlJrdkys](https://youtu.be/EwzhlJrdkys) 
 
 ## Links 
-IaaC: https://github.com/HackNarog2022/forseti_azure_configuration
-GitLab (the original repository of the project for each pipelines are created): https://gitlab.com/hacknarog2022
-DevPost (winning project of Hacknarök VI - 2022!): https://devpost.com/software/forseti 
+- IaaC: https://github.com/HackNarog2022/forseti_azure_configuration
+- GitLab (the original repository of the project for each pipelines are created): https://gitlab.com/hacknarog2022
+- DevPost (winning project of Hacknarök VI - 2022!): https://devpost.com/software/forseti 
 
 ## Inspiration
 We asked ourselves a question - what is the "new reality"? For us the answers were:
