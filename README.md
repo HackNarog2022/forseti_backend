@@ -1,3 +1,5 @@
+# Forseti
+
 ### Tired of your filter bubble? Want to meet someone with different opinion anywhere in the world? Let's create new reality of open-minded people. Select a topic and start a conversation with a stranger.
 
 ## Demo: 
@@ -5,7 +7,10 @@
 [![Watch the video](demo.png)](https://youtu.be/EwzhlJrdkys)
 [https://youtu.be/EwzhlJrdkys](https://youtu.be/EwzhlJrdkys) 
 
-## IaC: https://github.com/HackNarog2022/forseti_azure_configuration
+## Links 
+IaaC: https://github.com/HackNarog2022/forseti_azure_configuration
+GitLab (the original repository of the project for each pipelines are created): https://gitlab.com/hacknarog2022
+DevPost (winning project of Hacknarök VI - 2022!): https://devpost.com/software/forseti 
 
 ## Inspiration
 We asked ourselves a question - what is the "new reality"? For us the answers were:
