@@ -1,6 +1,9 @@
 ### Tired of your filter bubble? Want to meet someone with different opinion anywhere in the world? Let's create new reality of open-minded people. Select a topic and start a conversation with a stranger.
 
-## Demo: [https://youtu.be/EwzhlJrdkys](https://youtu.be/EwzhlJrdkys) 
+## Demo: 
+
+[![Watch the video](demo.png)](https://youtu.be/EwzhlJrdkys)
+[https://youtu.be/EwzhlJrdkys](https://youtu.be/EwzhlJrdkys) 
 
 ## IaC: https://github.com/HackNarog2022/forseti_azure_configuration
 
